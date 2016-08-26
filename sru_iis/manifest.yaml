@@ -5,162 +5,314 @@ package:
     desc    : SRU Package to manage IIS
     version : 0.1.0
     methods :
-        get_all:
-            route   : /iis/apps
-            label   : List Apps
-            desc    : Retrieve a list of all apps from SRU
-            params  : ~
-        get_by_app_name:
-            route   : /iis/apps
-            label   : Search for app
-            desc    : Retrieve a list of all app based on its name
-            params  : 
-                name:
-                    type        : string
-                    label       : Name
-                    desc        : Name of the app to search for
-                    required    : true
-                    input_type  : text
-                partial:
-                    type        : boolean
-                    label       : Partial
-                    desc        : Allow a partial name search
-                    required    : false
-                    input_type  : checkbox
-        get_by_pool_name:
-            route   : /iis/apps
-            label   : Search for app by application pool name
-            desc    : Retrieve a list of all apps based on its application pool name
-            params  : 
-                name:
-                    type        : string
-                    label       : Application Pool Name
-                    desc        : Name of the application pool to search for
-                    required    : true
-                    input_type  : text
-                partial:
-                    type        : boolean
-                    label       : Partial
-                    desc        : Allow a partial name search
-                    required    : false
-                    input_type  : checkbox
-        get_by_site_name:
-            route   : /iis/apps
-            label   : Search for app by site name
-            desc    : Retrieve a list of all apps based on its site name
-            params  : 
-                name:
-                    type        : string
-                    label       : Website Name
-                    desc        : Name of the website to search for
-                    required    : true
-                    input_type  : text
-                partial:
-                    type        : boolean
-                    label       : Partial
-                    desc        : Allow a partial name search
-                    required    : false
-                    input_type  : checkbox
-        get_all:
-            route   : /iis/pools
-            label   : List Application Pools
-            desc    : Retrieve a list of all application pools from SRU
-            params  : ~
-        get_by_name:
-            route   : /iis/pools
-            label   : Search for application pool
-            desc    : Retrieve a list of all application pool based on its name
-            params  : 
-                name:
-                    type        : string
-                    label       : Name
-                    desc        : Name of the application pool to search for
-                    required    : true
-                    input_type  : text
-                partial:
-                    type        : boolean
-                    label       : Partial
-                    desc        : Allow a partial name search
-                    required    : false
-                    input_type  : checkbox
-        get_by_pipelinemode:
-            route   : /iis/pools
-            label   : List Application Pools by Pipeline Mode
-            desc    : Show a list of Application Pools based on their pipeline mode
-            params  : 
-                mode:
-                    type        : option
-                        - intergrated
-                        - classic
-                    label       : Pipeline Mode
-                    desc        : Select the pipeline mode
-                    required    : true
-                    input_type  : select
-        get_by_runtimeverion:
-            route   : /iis/pools
-            label   : List by Runtime Version
-            desc    : Show a list of Application Pools based on their runtime version
-            params  : 
-                mode:
-                    type        : string
-                    label       : Runtime Version
-                    desc        : Enter the runtime version
-                    required    : true
-                    input_type  : text
-        get_by_state:
-            route   : /iis/pools
-            label   : List Application Pools by State
-            desc    : Show a list of Application Pools based on their state
-            params  : 
-                mode:
-                    type        : option
-                        - started
-                        - stopped
-                    label       : State
-                    desc        : Select state
-                    required    : true
-                    input_type  : select
-        get_by_site_id:
-            route   : /iis/pools
-            label   : Find Application Pools by ID
-            desc    : Shows an Application Pool based on its ID
-            params  : 
-                id:
-                    type        : int
-                    label       : ID
-                    desc        : Select Id
-                    required    : true
-                    input_type  : number
-        stop_by_site_id:
-            route   : /iis/pools
-            label   : Stop an Application Pools by ID
-            desc    : Stops an Application Pool based on its ID
-            params  : 
-                id:
-                    type        : int
-                    label       : ID
-                    desc        : Select Id
-                    required    : true
-                    input_type  : number
-        start_by_site_id:
-            route   : /iis/pools
-            label   : Start an Application Pools by ID
-            desc    : Start an Application Pool based on its ID
-            params  : 
-                id:
-                    type        : int
-                    label       : ID
-                    desc        : Select Id
-                    required    : true
-                    input_type  : number
-        recycle_by_site_id:
-            route   : /iis/pools
-            label   : Recycle an Application Pools by ID
-            desc    : Recycle an Application Pool based on its ID
-            params  : 
-                id:
-                    type        : int
-                    label       : ID
-                    desc        : Select Id
-                    required    : true
-                    input_type  : number
+        iis/apps:
+            get_all:
+                label   : List Apps
+                desc    : Retrieve a list of all apps from SRU
+                params  : ~
+            get_by_app_name:
+                label   : Search for app
+                desc    : Retrieve a list of all app based on its name
+                params : 
+                    name:
+                        type        : string
+                        label       : Name
+                        desc        : Name of the app to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial name search
+                        required    : false
+                        input_type  : checkbox
+            get_by_pool_name:
+                label   : Search for app by application pool name
+                desc    : Retrieve a list of all apps based on its application pool name
+                params  : 
+                    name:
+                        type        : string
+                        label       : Application Pool Name
+                        desc        : Name of the application pool to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial name search
+                        required    : false
+                        input_type  : checkbox
+            get_by_site_name:
+                label   : Search for app by site name
+                desc    : Retrieve a list of all apps based on its site name
+                params  : 
+                    name:
+                        type        : string
+                        label       : Website Name
+                        desc        : Name of the website to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial name search
+                        required    : false
+                        input_type  : checkbox
+        iis/pools:
+            get_all:
+                label   : List Application Pools
+                desc    : Retrieve a list of all application pools from SRU
+                params  : ~
+            get_by_name:
+                label   : Search for application pool
+                desc    : Retrieve a list of all application pool based on its name
+                params  : 
+                    name:
+                        type        : string
+                        label       : Name
+                        desc        : Name of the application pool to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial name search
+                        required    : false
+                        input_type  : checkbox
+            get_by_pipelinemode:
+                label   : List Application Pools by Pipeline Mode
+                desc    : Show a list of Application Pools based on their pipeline mode
+                params  : 
+                    mode:
+                        type        : 
+                            - intergrated
+                            - classic
+                        label       : Pipeline Mode
+                        desc        : Select the pipeline mode
+                        required    : true
+                        input_type  : select
+            get_by_runtimeverion:
+                label   : List by Runtime Version
+                desc    : Show a list of Application Pools based on their runtime version
+                params  : 
+                    mode:
+                        type        : string
+                        label       : Runtime Version
+                        desc        : Enter the runtime version
+                        required    : true
+                        input_type  : text
+            get_by_state:
+                label   : List Application Pools by State
+                desc    : Show a list of Application Pools based on their state
+                params  : 
+                    mode:
+                        type        : option
+                            - started
+                            - stopped
+                        label       : State
+                        desc        : Select state
+                        required    : true
+                        input_type  : select
+            get_by_site_id:
+                label   : Find Application Pools by ID
+                desc    : Shows an Application Pool based on its ID
+                params  : 
+                    id:
+                        type        : int
+                        label       : ID
+                        desc        : Select Id
+                        required    : true
+                        input_type  : number
+            stop_by_site_id:
+                label   : Stop an Application Pools by ID
+                desc    : Stops an Application Pool based on its ID
+                params  : 
+                    id:
+                        type        : int
+                        label       : ID
+                        desc        : Select Id
+                        required    : true
+                        input_type  : number
+            start_by_site_id:
+                label   : Start an Application Pools by ID
+                desc    : Start an Application Pool based on its ID
+                params  : 
+                    id:
+                        type        : int
+                        label       : ID
+                        desc        : Select Id
+                        required    : true
+                        input_type  : number
+            recycle_by_site_id:
+                label   : Recycle an Application Pools by ID
+                desc    : Recycle an Application Pool based on its ID
+                params  : 
+                    id:
+                        type        : int
+                        label       : ID
+                        desc        : Select Id
+                        required    : true
+                        input_type  : number
+        iis/sites:
+            get_all:
+                label   : List all sites
+                desc    : Retrieve a list of all sites from SRU
+                params  : ~
+            get_by_id:
+                label   : Find site by ID
+                desc    : Retrieve a site and its details based on its ID
+                params : 
+                    id:
+                        type        : int
+                        label       : ID
+                        desc        : ID of the site to return
+                        required    : true
+                        input_type  : number
+            get_by_name:
+                label   : Search for site
+                desc    : Retrieve a list of all sites based on its name
+                params  : 
+                    name:
+                        type        : string
+                        label       : Name
+                        desc        : Name of the site to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial name search
+                        required    : false
+                        input_type  : checkbox
+            get_by_state:
+                label   : Search for site by state
+                desc    : Retrieve a list of all sites based on its running state
+                params  : 
+                    name:
+                        type        :
+                            - started
+                            - stopped
+                        label       : State
+                        desc        : Select state
+                        required    : true
+                        input_type  : select
+            get_by_binding:
+                label   : Search for site by binding
+                desc    : Retrieve a list of all sites based on its binding
+                params  : 
+                    name:
+                        type        : string
+                        label       : Binding
+                        desc        : Binding of the site to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial binding search
+                        required    : false
+                        input_type  : checkbox 
+            stop_by_site_id:
+                label   : Stop an Site by ID
+                desc    : Stops an Site based on its ID
+                params  : 
+                    id:
+                        type        : int
+                        label       : ID
+                        desc        : Select Id
+                        required    : true
+                        input_type  : number
+            start_by_site_id:
+                label   : Start an Site by ID
+                desc    : Start an Site based on its ID
+                params  : 
+                    id:
+                        type        : int
+                        label       : ID
+                        desc        : Select Id
+                        required    : true
+                        input_type  : number
+            recycle_by_site_id:
+                label   : Recycle an Site by ID
+                desc    : Recycle an Site based on its ID
+                params  : 
+                    id:
+                        type        : int
+                        label       : ID
+                        desc        : Select Id
+                        required    : true
+                        input_type  : number
+        iis/vdir:
+            get_all:
+                label   : List virtual directories
+                desc    : Retrieve a list of all virtual directories from SRU
+                params  : ~
+            get_by_name:
+                label   : Search for virtual directories
+                desc    : Retrieve a list of all virtual directories based on its name
+                params  : 
+                    name:
+                        type        : string
+                        label       : Name
+                        desc        : Name of the virtual directories to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial name search
+                        required    : false
+                        input_type  : checkbox
+            get_by_physicalpath:
+                label   : Search for virtual directories by pysical path
+                desc    : Retrieve a list of all virtual directories based on its pysical path
+                params  : 
+                    name:
+                        type        : string
+                        label       : Name
+                        desc        : pysical path of the virtual directories to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial pysical path search
+                        required    : false
+                        input_type  : checkbox
+        iis/wp:
+            get_all:
+                label   : List Worker Processes
+                desc    : Retrieve a list of all Worker Processes from SRU
+                params  : ~
+            get_by_name:
+                label   : Search for Worker Processes
+                desc    : Retrieve a list of all Worker Processes based on its name
+                params  : 
+                    name:
+                        type        : string
+                        label       : Name
+                        desc        : Name of the Worker Processes to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial name search
+                        required    : false
+                        input_type  : checkbox
+            get_by_pool_name:
+                label   : Search for virtual directories by pool name
+                desc    : Retrieve a list of all virtual directories based on its pool name
+                params  : 
+                    name:
+                        type        : string
+                        label       : Name
+                        desc        : pool name of the virtual directories to search for
+                        required    : true
+                        input_type  : text
+                    partial:
+                        type        : boolean
+                        label       : Partial
+                        desc        : Allow a partial pool name search
+                        required    : false
+                        input_type  : checkbox
