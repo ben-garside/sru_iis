@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 def not_found(**kw):
     msg = {
         "message": "invalid Action requested",
+        'result': [],
         "code": 404
     }
 
@@ -24,12 +25,18 @@ def get_all(**kw):
         msg = {
             "message": message,
             "code": 200,
-            "wProcesses": sitesList
+            "result": sitesList
         }
         logger.debug(message)
 
     except Exception as e:
-        logger.error("'wp/get_all' fialed with Exception: {}".format(e))
+        message = "'wp/get_all' fialed with Exception: {}".format(e)
+        msg = {
+            "message": message,
+            "code": 501,
+            "result": []
+        }
+        logger.error(message)
 
     output = encode(msg, json=True)
     return Response(body=output, content_type="application/json")
@@ -40,12 +47,12 @@ def get_by_name(**kw):
     msg = {}
     try:
         if 'name' in kw.keys():
-            if isinstance(kw['name'], str):
+            if isinstance(kw['name'], int):
                 sites = iis.wp.get_by_name(kw['name'])
                 if sites:
                     message = "Worker process found with name '{}'".format(kw['name'])
                     msg.update({
-                        'wProcesses': sites,
+                        'result': sites,
                         'message': message,
                         'code': 200
                     })
@@ -54,13 +61,15 @@ def get_by_name(**kw):
                     message = "No worker processes found with name '{}'".format(kw['name'])
                     msg.update({
                         'message': message,
+                        'result': [],
                         'code': 404
                     })
                     logger.debug(message)
             else:
-                message = "'name' type must be a string"
+                message = "'name' type must be a int"
                 msg.update({
                     'message': message,
+                    'result': [],
                     'code': 404
                 })
                 logger.debug(message)
@@ -68,11 +77,18 @@ def get_by_name(**kw):
             message = "The 'name' parameter is missing"
             msg.update({
                 'message': message,
+                'result': [],
                 'code': 404
             })
             logger.debug(message)
     except Exception as e:
-        logger.error("'wp/get_by_name' fialed with Exception: {}".format(e))
+        message = "'wp/get_by_name' fialed with Exception: {}".format(e)
+        msg = {
+            "message": message,
+            "code": 501,
+            "result": []
+        }
+        logger.error(message)
     
     output = encode(msg, json=True)
     return Response(body=output, content_type="application/json")
@@ -89,10 +105,11 @@ def get_by_pool_name(**kw):
                     site_len = len(sites)
                 else:
                     site_len = 1
-                if sites:
+                    sites = [sites]
+                if sites[0]:
                     message = "{} worker process(es) found with name '{}' (with partial:{})".format(site_len, kw['name'], kw['partial'])
                     msg.update({
-                        'wProcesses': sites,
+                        'result': sites,
                         'message': message,
                         'code': 200
                     })
@@ -101,6 +118,7 @@ def get_by_pool_name(**kw):
                     message = "No worker processes found with name '{}' (with partial:{})".format(kw['name'], kw['partial'])
                     msg.update({
                         'message': message,
+                        'result': [],
                         'code': 404
                     })
                     logger.debug(message)
@@ -108,6 +126,7 @@ def get_by_pool_name(**kw):
                 message = "'name' type must be a string"
                 msg.update({
                     'message': message,
+                    'result': [],
                     'code': 404
                 })
                 logger.debug(message)
@@ -115,11 +134,18 @@ def get_by_pool_name(**kw):
             message = "The 'name' parameter is missing"
             msg.update({
                 'message': message,
+                'result': [],
                 'code': 404
             })
             logger.debug(message)
     except Exception as e:
-        logger.error("'wp/get_by_pool_name' fialed with Exception: {}".format(e))
+        message = "'wp/get_by_pool_name' fialed with Exception: {}".format(e)
+        msg = {
+            "message": message,
+            "code": 501,
+            "result": []
+        }
+        logger.error(message)
     
     output = encode(msg, json=True)
     return Response(body=output, content_type="application/json")

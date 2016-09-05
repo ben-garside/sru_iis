@@ -24,14 +24,14 @@ def get_all(**kw):
             msg = {
                 "message": message,
                 "code": 200,
-                "apps": sites
+                "result": sites
             }
             logger.debug(message)
         else:
             msg = {
                 "message": "Error getting apps",
                 "code": 400,
-                "apps": sites
+                "result": sites
             }
 
         
@@ -53,18 +53,20 @@ def get_by_app_name(**kw):
                     site_len = len(apps)
                 else:
                     site_len = 1
-                if apps:
+                    apps = [apps]
+                if apps[0]:
                     message = "{} app(s) found with name '{}' (with partial:{})".format(site_len, kw['name'], kw['partial'])
                     msg.update({
                         "message": message,
                         "code": 200,
-                        "apps": apps
+                        "result": apps
                     })
                     logger.debug(message)
                 else:
                     message = "No apps found with name '{}' (with partial:{})".format(kw['name'], kw['partial'])
                     msg.update({
                         'message': message,
+                        'result' : [],
                         'code': 404
                     })
                     logger.debug(message)
@@ -72,6 +74,7 @@ def get_by_app_name(**kw):
                 message = "'name' type must be a string"
                 msg.update({
                     'message': message,
+                    'result' : [],
                     'code': 404
                 })
                 logger.debug(message)
@@ -79,6 +82,7 @@ def get_by_app_name(**kw):
             message = "The 'name' parameter is missing"
             msg.update({
                 'message': message,
+                'result' : [],
                 'code': 404
             })
             logger.debug(message)
@@ -101,18 +105,20 @@ def get_by_pool_name(**kw):
                     site_len = len(apps)
                 else:
                     site_len = 1
-                if apps:
+                    apps = [apps]
+                if apps[0]:
                     message = "{} app(s) found with application pool name '{}' (with partial:{})".format(site_len, kw['name'], kw['partial'])
                     msg.update({
                         "message": message,
                         "code": 200,
-                        "apps": apps
+                        "result": apps
                     })
                     logger.debug(message)
                 else:
                     message = "No apps found with application pool name '{}' (with partial:{})".format(kw['name'], kw['partial'])
                     msg.update({
                         'message': message,
+                        'result' : [],
                         'code': 404
                     })
                     logger.debug(message)
@@ -120,6 +126,7 @@ def get_by_pool_name(**kw):
                 message = "'name' type must be a string"
                 msg.update({
                     'message': message,
+                    'result' : [],
                     'code': 404
                 })
                 logger.debug(message)
@@ -127,6 +134,7 @@ def get_by_pool_name(**kw):
             message = "The 'name' parameter is missing"
             msg.update({
                 'message': message,
+                'result' : [],
                 'code': 404
             })
             logger.debug(message)
@@ -149,18 +157,20 @@ def get_by_site_name(**kw):
                     site_len = len(apps)
                 else:
                     site_len = 1
-                if apps:
+                    apps = [apps]
+                if apps[0]:
                     message = "{} app(s) found with site name '{}' (with partial:{})".format(site_len, kw['name'], kw['partial'])
                     msg.update({
                         "message": message,
                         "code": 200,
-                        "apps": apps
+                        "result": apps
                     })
                     logger.debug(message)
                 else:
                     message = "No apps found with site name '{}' (with partial:{})".format(kw['name'], kw['partial'])
                     msg.update({
                         'message': message,
+                        'result' : [],
                         'code': 404
                     })
                     logger.debug(message)
@@ -168,6 +178,7 @@ def get_by_site_name(**kw):
                 message = "'name' type must be a string"
                 msg.update({
                     'message': message,
+                    'result' : [],
                     'code': 404
                 })
                 logger.debug(message)
@@ -175,6 +186,7 @@ def get_by_site_name(**kw):
             message = "The 'name' parameter is missing"
             msg.update({
                 'message': message,
+                'result' : [],
                 'code': 404
             })
             logger.debug(message)

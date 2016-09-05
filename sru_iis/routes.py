@@ -1,9 +1,9 @@
 from sru.support.web import Response
-from .controllers import apps as appsCtrl
-from .controllers import sites as sitesCtrl
-from .controllers import pools as poolsCtrl
-from .controllers import vdir as vdirCtrl
-from .controllers import wp as wpCtrl
+from . import apps as appsCtrl
+from . import sites as sitesCtrl
+from . import pools as poolsCtrl
+from . import vdir as vdirCtrl
+from . import wp as wpCtrl
 import logging
 
 logger = logging.getLogger(__name__)
