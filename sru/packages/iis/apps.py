@@ -1,6 +1,6 @@
 from sru.support.web import Response
 from sru.support.data_process import encode
-import iis_shim as iis
+import sru.packages.iis_shim as iis
 import logging
 
 
@@ -15,6 +15,7 @@ def not_found(**kw):
 
     output = encode(msg, json=True)
     return Response(body=output, content_type="application/json")
+
 
 def get_all(**kw):
     try:
