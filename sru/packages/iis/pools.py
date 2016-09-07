@@ -1,6 +1,6 @@
 from sru.support.web import Response
 from sru.support.data_process import encode
-import sru.packages.iis_shim as iis
+import iis_shim as iis
 import time
 import logging
 
